@@ -1,0 +1,26 @@
+class Solution:
+    # @param A : integer
+    # @param B : list of integers
+    # @return an integer
+    count = 0
+    def findsum(self,M,sumsb,partion):
+        end = 0
+        temp_sum = 0
+        while end < len(M):
+            temp_sum += M[end]
+            end += 1
+            if temp_sum == sumsb and end == len(M) and partion == 1:
+                self.count += 1
+                break
+            elif temp_sum == sumsb:
+                self.findsum(M[end:],sumsb,partion-1)
+        return 0
+    def solve(self, A, B):
+        sumsb = 0
+        global count
+        for i in range(A):
+            sumsb += B[i]
+            self.findsum(B[i+1:],sumsb,2)
+        
+        return self.count
+    
